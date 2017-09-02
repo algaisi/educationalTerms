@@ -1,0 +1,143 @@
+
+    <div class="container topcontainarpad">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-sm-push-2">
+                <select class="form-control" name="searchtype" id="searchtype" ng-model="searchtype" ng-change="searchtypeselected(searchtype)">
+                        <option value="0" selected="selected" > Choose Language </option>
+                        <option value="1"> English </option>
+                        <option value="2"> Arabic </option>
+                </select>        
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <div class="input-group">
+                    <input id="searchtext" name="searchtext" type="text" class="form-control" placeholder="Search" ng-model="searchtext">
+                    <span class="input-group-btn">
+                        <button id="searchbutton" name="searchbutton" class="btn btn-default" type="button" ng-click="searchbutton()">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container topcontainarpad">
+        <div class="row">
+            <div class="text-center">
+                <h1>Welcom To Educational Terms Dictionary</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container topcontainarpad" ng-if="showTerms" >
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-push-1">
+                    <div class="col-xs-12 col-sm-12">
+                        <button ng-show="showFavorites" class="btn btn-warning pull-right" ng-click="addToFavorites(term)"><span class="glyphicon glyphicon-star-empty"></span> Save to Favorite</button>
+                    </div>
+                <div class="col-xs-12 col-sm-6">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">English</legend>
+                            <div class="control-group">
+                                <h4>{{term.entitle}}</h4>
+                                <p class="text-justify" >{{term.endescription}}</p>
+                            </div>
+                    </fieldset>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Arabic</legend>
+                            <div class="control-group">
+                                <h4>{{term.entitle}}</h4>   
+                                <p class="text-justify" >{{term.ardescription}}</p>                                
+                            </div>
+                    </fieldset>        
+                </div>
+            </div>
+        </div>    
+    </div>    
+
+ 
+    <div class="container topcontainarpad" ng-if="showComments" >
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-push-1">
+                <fieldset class="scheduler-border">
+                    <legend class="scheduler-border">Users Comments</legend>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="comment in term.comments | orderBy:orderText" class="well">
+                            <blockquote>
+                                <div class="col-xs-12 col-sm-6">
+                                    <p>{{comment.encomment}}</p>
+                                </div>
+                                <div class="col-xs-12 col-sm-6">
+                                    <p>{{comment.arcomment}}</p>
+                                </div>
+                                <footer>{{comment.postedBy.username}}, {{comment.updatedAt | date:'MMM. dd, yyyy'}}</footer>
+                            </blockquote>
+                        </li>
+                    </ul>
+                    <div class="col-xs-9 col-xs-offset-1">
+                        <form class="form-horizontal" name="commentForm" ng-submit="submitComment()" novalidate>              
+                            <div class="form-group">
+                                <label for="encomment" class="col-sm-3 control-label">English Comments</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="3" name="encomment" ng-model="newcomment.encomment">
+                                    </textarea>
+                               </div>
+                            </div> 
+                            <div class="form-group">
+                                <label for="arcomment" class="col-sm-3 control-label">Arabic Comments</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="3" name="arcomment" ng-model="newcomment.arcomment">
+                                    </textarea>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Submit Comment</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </fieldset>                
+            </div>
+        </div>    
+    </div>       
+
+    <div class="container topcontainarpad" ng-if="showMessage" >
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-sm-push-3">
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close"
+                        data-dismiss="alert" aria-label="Close" ng-click="closeMessage()">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{message}}
+                </div>
+            </div>    
+        </div>    
+    </div>    
+        
+
+    <div class="container topcontainarpad">
+        <div class="row">
+            <div class="text-center">
+                <div class="col-xs-12 col-sm-3 col-sm-push-3">
+                    <a ng-click="openLogin()" class="btn btn-primary btn-lg btn-block">Login</a>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-sm-push-3">
+                    <a ng-click="openRegister()" class="btn btn-success btn-lg btn-block">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    
