@@ -57,7 +57,7 @@ $ gulp watch
 
 
 
-Project-Ionic
+Project-Ionic v1
  ==============
 
  ## Using this project
@@ -102,3 +102,28 @@ Project Online on this link :
 ==============
 
 educationalTerms [educationalTerms]: http://terms.abegs.org/
+
+
+For testing users :
+==============
+ ## end users :
+
+```bash
+username : user
+password : user2017
+```
+
+## Experts :
+
+```bash
+username : expert
+password : expert2017
+```
+
+
+## administartor:
+
+```bash
+username : admin
+password : admin2017
+```
