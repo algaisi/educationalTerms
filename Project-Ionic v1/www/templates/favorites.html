@@ -1,0 +1,24 @@
+<ion-view view-title="Educational Terms Favorites">
+    <ion-content>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <div class="card cardpadding" ng-repeat="term in terms">
+                    <h4>{{term.entitle}}</h4>
+                    <p>{{term.endescription}}</p>
+                    <h4>{{term.artitle}}</h4>
+                    <p>{{term.ardescription}}</p>
+                    <p>
+                        <button class="button button-clear button-positive" ng-click="deleteFavorite(term)"> <i class="ion-android-delete"></i>  Delete </button>
+                    </p>        
+                </div>
+            </div>
+        </div>
+        <div ng-if="showMessage" class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close"
+            data-dismiss="alert" aria-label="Close" ng-click="closeMessage()">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+        </div>    
+    </ion-content>
+</ion-view>    

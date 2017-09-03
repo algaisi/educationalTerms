@@ -1,0 +1,85 @@
+<ion-view view-title="Educational Terms Dictionary">
+  <ion-content>
+
+      <div class="item item-input item-select">
+            <div class="input-label">
+                Choose Language
+            </div>
+            <select ng-model="search.searchtype" ng-change="searchtypeselected(search.searchtype)">
+                <option value="1"> English </option>
+                <option value="2"> Arabic </option>
+            </select>
+      </div>
+
+      <div class="item item-input">
+          <input id="searchtext" name="searchtext" type="text" placeholder="Enter Terms Here ..." ng-model="search.searchtext">
+          <button class="button button-positive" ng-click="searchbutton()">Search</button>
+      </div>
+
+      <div ng-if="showMessage" class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close"
+            data-dismiss="alert" aria-label="Close" ng-click="closeMessage()">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            {{message}}
+       </div>
+
+       <button class="button button-full button-positive" ng-click="addToFavorites(term)">
+            <i class="ion-android-star-outline"></i>
+            Save to Favorite
+       </button>
+
+       
+       <div ng-if="showTerms" >
+            <div class="card">
+                <div class="item item-body item-text-wrap">
+                    <h4>{{term.entitle}}</h4>
+                    <p>{{term.endescription}}</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="item item-body item-text-wrap">
+                    <h4>{{term.entitle}}</h4>
+                    <p>{{term.ardescription}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row"  ng-if="showComments">
+            <div>
+                <h4> Comments</h4>
+                <ul class="list">
+                    <li ng-repeat="comment in term.comments">
+                        <blockquote>
+                            <p>{{comment.encomment}}</p>
+                            <p>{{comment.arcomment}}</p>
+                            <footer>{{comment.postedBy.username}}, {{comment.updatedAt | date:'MMM. dd, yyyy'}}</footer>
+                        </blockquote>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card" ng-if="showComments">
+            <div class="item item-divider">
+                Add New Term
+            </div>
+            <form name="commentForm" ng-submit="submitComment()">                    
+                <div class="item item-text-wrap">
+                    <label class="item item-input">
+                        <span class="input-label">English Comments</span>
+                        <textarea type="text" ng-model="newcomment.encomment"></textarea>
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Arabic Comments</span>
+                        <textarea type="text" ng-model="newcomment.arcomment"></textarea>
+                    </label>
+                </div>
+                <div class="item item-divider">
+                    <button type="submit" class="button button-clear button-positive"> <i class="ion-android-add-circle"></i>  Submit Term</button>
+                </div>
+            </form>            
+        </div>
+  </ion-content>
+</ion-view>

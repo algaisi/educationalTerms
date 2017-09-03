@@ -1,0 +1,62 @@
+<ion-view view-title="Educational Terms Administrator">
+        <ion-content>
+            <div class="card">
+                <div class="item item-divider">
+                        <button class="button button-clear button-positive" ng-click="newItem()"> <i class="ion-android-add-circle"></i>  Add Term</button>
+                </div>
+                <div class="item item-text-wrap">
+                    <div class="card cardpadding" ng-repeat="term in terms">
+                        <h4>{{term.entitle}}</h4>
+                        <p>{{term.endescription}}</p>
+                        <h4>{{term.artitle}}</h4>
+                        <p>{{term.ardescription}}</p>
+                        <p>
+                            <button class="button button-clear button-positive"> <i class="ion-android-create"></i>  Update</button>
+                            <button class="button button-clear button-positive"> <i class="ion-android-delete"></i>  Delete</button>
+                            <button class="button button-clear button-positive"> <i class="ion-android-checkbox-outline"></i>  Approved</button>
+                        </p>        
+                    </div>
+                </div>
+            </div>
+            <div class="card" ng-if="showtermForm">
+                <div class="item item-divider">
+                   Add New Term
+                </div>
+                <form id="termForm" name="termForm" ng-submit="submitTerm()">                    
+                    <div class="item item-text-wrap">
+                                <label class="item item-input">
+                                    <span class="input-label">English Title</span>
+                                    <input type="text" ng-model="term.entitle">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label">Arabic Title</span>
+                                    <input type="text" ng-model="term.artitle">
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label">English Description</span>
+                                    <textarea type="text" ng-model="term.endescription"></textarea>
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label">Arabic Description</span>
+                                    <textarea type="text" ng-model="term.ardescription"></textarea>
+                                </label>
+                                <label class="item item-input">
+                                    <span class="input-label">Approved</span>
+                                    <input type="checkbox" ng-model="term.approved">
+                                </label>
+                    </div>
+                    <div class="item item-divider">
+                        <button type="submit" class="button button-clear button-positive"> <i class="ion-android-add-circle"></i>  Submit Term</button>
+                    </div>
+                </form>            
+            </div>
+
+            <div ng-if="showMessage" class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close"
+                    data-dismiss="alert" aria-label="Close" ng-click="closeMessage()">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{message}}
+            </div>    
+            </ion-content>
+    </ion-view>    
