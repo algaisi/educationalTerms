@@ -28,8 +28,8 @@ exports.verifyOrdinaryUser = function(req, res, next) {
   }
 };
 
-exports.verifyAdministrators = function(req, res, next) {
-  if (req.decoded.roles == 3) {
+exports.verifyExpert = function(req, res, next) {
+  if (req.decoded.roles > 1) {
     next();
   } else {
     var err = new Error('You are not authorized to perform this operation!');
@@ -38,8 +38,8 @@ exports.verifyAdministrators = function(req, res, next) {
   }
 };
 
-exports.verifyExpert = function(req, res, next) {
-  if (req.decoded.roles == 2) {
+exports.verifyAdministrators = function(req, res, next) {
+  if (req.decoded.roles == 3) {
     next();
   } else {
     var err = new Error('You are not authorized to perform this operation!');

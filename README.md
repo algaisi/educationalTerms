@@ -101,4 +101,4 @@ build on ios:
 Project Online on this link :
 ==============
 
-[terms.abegs.org]: http://terms.abegs.org/
+educationalTerms [educationalTerms]: http://terms.abegs.org/

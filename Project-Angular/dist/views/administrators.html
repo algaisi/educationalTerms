@@ -1,0 +1,111 @@
+<div class="container topcontainarpad">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <div class="col-sm-1 right">
+                    <button ng-click="newItem()" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Add New</button>
+                </div>
+                <div class="col-sm-10">
+                    <h4 class="text-center">administrators in ABEGS To reviews and approves educational terms. </h4>
+                </div>
+            </div>
+                                                
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>   
+                            <th class="col-sm-3"> Title (English) </th>
+                            <th class="col-sm-3"> Title (Arabic) </th>
+                            <th class="col-sm-3"> Approved</th>
+                            <th class="col-sm-3"> Manage </th>
+                        </tr> 
+                    </thead>
+                            
+                    <tbody>   
+                        <tr ng-repeat="term in terms">  
+                            <td class="col-sm-3">{{term.entitle}}</td>
+                            <td class="col-sm-3">{{term.artitle}}</td>
+                            <td class="col-sm-3"><input type="checkbox" id="checkbox" disabled ng-model="term.approved"></td>
+                            <td class="col-sm-3">
+                                <button class="btn btn-default btn-md" ng-click="displayItem(term)"><span class="glyphicon glyphicon-zoom-in"></span></button>
+                                <button class="btn btn-warning btn-md" ng-click="updateItem(term)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button class="btn btn-danger btn-md"  ng-click="deleteItem(term)"> <span class="glyphicon glyphicon-trash"></span></button>
+                                <button class="btn btn-success btn-md" ng-click="approvedItem(term)"> <span class="glyphicon glyphicon-ok"></span></button>
+                            </td>
+                        </tr>
+                    </tbody>                       
+                </table>
+            </div>
+        </div>                
+    </div>
+</div>    
+
+
+
+
+
+<div class="container topcontainarpad" ng-if="showtermForm">
+    <form class="form-horizontal" name="termForm" ng-submit="submitTerm()" novalidate>              
+        <div class="form-group">
+            <label for="entitle" class="col-sm-3 control-label">English Title</label>
+            <div class="col-sm-8">
+                <input class="form-control" name="entitle" placeholder="Enter English Title" ng-model="term.entitle">
+            </div>
+        </div> 
+        <div class="form-group">
+                <label for="artitle" class="col-sm-3 control-label">Arabic Title</label>
+                <div class="col-sm-8">
+                    <input class="form-control" name="artitle" placeholder="Enter Arabic Title" ng-model="term.artitle">
+                </div>
+        </div> 
+        <div class="form-group">
+            <label for="endescription" class="col-sm-3 control-label">English Description</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" rows="3" name="endescription" ng-model="term.endescription">
+                </textarea>
+            </div>
+        </div> 
+        <div class="form-group">
+            <label for="ardescription" class="col-sm-3 control-label">Arabic Description</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" rows="3" name="ardescription" ng-model="term.ardescription">
+                </textarea>
+            </div>
+        </div>   
+        <div class="form-group">
+            <label for="ardescription" class="col-sm-3 control-label">Approved</label>
+            <div class="col-sm-8">
+                <div class="checkbox col-sm-5 col-sm-offset-2">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" ng-model="term.approved">
+                        <strong> Check To Approve This Terms</strong>
+                    </label>
+                </div>
+            </div>
+        </div>     
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Submit Term</button>
+            </div>
+        </div>
+    </form>
+</div>    
+    
+
+
+
+
+
+<div class="container topcontainarpad" ng-if="showMessage">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-sm-push-3">
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close"
+                    data-dismiss="alert" aria-label="Close" ng-click="closeMessage()">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{message}}
+            </div>
+        </div>    
+    </div>    
+</div>    

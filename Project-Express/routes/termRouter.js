@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Terms = require('../models/terms');
+var verify = require('./verify');
 
 var termRouter = express.Router();
 termRouter.use(bodyParser.json());
@@ -16,7 +17,7 @@ termRouter.route('/')
     });
 })
 
-.post(Verify.verifyOrdinaryUser, Verify.verifyExpert, function (req, res, next) {
+.post(verify.verifyOrdinaryUser, verify.verifyExpert, function (req, res, next) {
     Terms.create(req.body, function (err, term) {
         if (err) next(err);
         console.log('Term created!');
@@ -28,7 +29,7 @@ termRouter.route('/')
     });
 })
 
-.delete(Verify.verifyOrdinaryUser, Verify.verifyAdministrators, function (req, res, next) {
+.delete(verify.verifyOrdinaryUser, verify.verifyAdministrators, function (req, res, next) {
     Terms.remove({}, function (err, resp) {
         if (err) next(err);
         res.json(resp);
@@ -45,7 +46,7 @@ termRouter.route('/:termId')
     });
 })
 
-.put(Verify.verifyExpert, Verify.verifyAdministrators, function (req, res, next) {
+.put(verify.verifyOrdinaryUser, verify.verifyExpert, function (req, res, next) {
     Terms.findByIdAndUpdate(req.params.termId, {
         $set: req.body
     }, {
@@ -56,7 +57,7 @@ termRouter.route('/:termId')
     });
 })
 
-.delete(Verify.verifyAdministrators, function (req, res, next) {
+.delete(verify.verifyOrdinaryUser, verify.verifyAdministrators, function (req, res, next) {
         Terms.findByIdAndRemove(req.params.termId, function (err, resp) {
         if (err) next(err);
         res.json(resp);
@@ -75,7 +76,7 @@ termRouter.route('/:termId/comments')
     });
 })
 
-.post(Verify.verifyOrdinaryUser,function (req, res, next) {
+.post(verify.verifyOrdinaryUser, function (req, res, next) {
     Terms.findById(req.params.termId, function (err, term) {
         if (err) next(err);
         req.body.postedBy = req.decoded._id;
@@ -88,7 +89,7 @@ termRouter.route('/:termId/comments')
     });
 })
 
-.delete(Verify.verifyAdministrators, function (req, res, next) {
+.delete(verify.verifyOrdinaryUser, verify.verifyAdministrators, function (req, res, next) {
     Terms.findById(req.params.termId, function (err, term) {
         if (err) next(err);
         for (var i = (term.comments.length - 1); i >= 0; i--) {
@@ -114,7 +115,7 @@ termRouter.route('/:termId/comments/:commentId')
     });
 })
 
-.put(Verify.verifyOrdinaryUser, function (req, res, next) {
+.put(verify.verifyOrdinaryUser, function (req, res, next) {
     Terms.findById(req.params.termId, function (err, term) {
         if (err) next(err);
         term.comments.id(req.params.commentId).remove();
@@ -128,7 +129,7 @@ termRouter.route('/:termId/comments/:commentId')
     });
 })
 
-.delete(Verify.verifyAdministrators, function (req, res, next) {
+.delete(verify.verifyOrdinaryUser, verify.verifyAdministrators, function (req, res, next) {
     Terms.findById(req.params.termId, function (err, term) {
         if (term.comments.id(req.params.commentId).postedBy != req.decoded._id) {
             var err = new Error('You are not authorized to perform this operation!');
